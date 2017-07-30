@@ -1,26 +1,20 @@
 import { Accelerometer } from 'react-native-sensors'
 import { Platform } from 'react-native'
 import publish from '../PubNub'
-// import { debounce } from 'lodash'
 
 // Values for scale
 let ACCELEROMETER_MIN = Platform.OS === 'ios' ? 1 : -10
 let ACCELEROMETER_MAX = Platform.OS === 'ios' ? -1 : 10
 
-// const debouncedPublish = debounce(publish, 500)
-
 class Motion {
   accelerationObservable: undefined
-  updateInterval: 1000
 
   onColorChange = (colorChanged: Function) => {
     this.accelerationObservable = new Accelerometer({
-      updateInterval: this.updateInterval
+      updateInterval: 250 // how many ms between sending data
     })
     this.accelerationObservable.subscribe((data) => {
-      // console.log('THIS IS IT - GO GO:', data);
-      // debouncedPublish(data);
-        publish(data);
+        publish('sensor_data', data);
       return rgbFromAccelerometer(data.x, data.y, data.z, (rgb) => colorChanged(rgb))
     })
   }
