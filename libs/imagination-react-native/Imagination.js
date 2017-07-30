@@ -20,9 +20,17 @@ class Imagination {
     this.accelerationObservable.subscribe((data) => {
       // console.log('THIS IS IT - GO GO:', data);
       // debouncedPublish(data);
-      publish(data);
+        publish(data);
       return rgbFromAccelerometer(data.x, data.y, data.z, (rgb) => colorChanged(rgb))
     })
+  }
+
+  buttonPressed = (colorChanged, sendData) => {
+    if(sendData){
+      this.onColorChange(colorChanged);
+    } else {
+      this.stop();
+    }
   }
 
   stop = () => {

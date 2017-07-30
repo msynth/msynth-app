@@ -1,22 +1,23 @@
 // @flow
 import React, {PureComponent} from 'react'
-import {View, Image, Text, StyleSheet, TouchableOpacity, Linking, Platform} from 'react-native'
+import {View, Image, Text, StyleSheet, TouchableOpacity, Linking, Platform, TouchableHighlight} from 'react-native'
 import {logo, matzielabLogo} from '../libs/Images'
 
 export default class Welcome extends PureComponent {
-
-  render(): * {
-    return <View style={styles.wrapper}>
-      <Image source={logo} style={styles.logo} />
-      <TouchableOpacity style={styles.button} onPress={() => this.goToMatzielab()}>
-        <Image source={matzielabLogo} style={styles.matzielabLogo} />
-        <Text style={styles.credit}>By Matzielab</Text>
-      </TouchableOpacity>
-    </View>
+  constructor(props){
+    super(props);
   }
 
-  goToMatzielab () {
-    Linking.openURL('https://Matzielab.com')
+  render(): * {
+    const buttonLabel = this.props.sendData ? 'Stop' : 'Start';
+    return <View style={styles.wrapper}>
+      <Image source={logo} style={styles.logo} />
+      <TouchableOpacity style={styles.button}>
+        <TouchableHighlight onPress={() => this.props.buttonPressed()}>
+          <Text style={styles.credit}>{buttonLabel}</Text>
+        </TouchableHighlight>
+      </TouchableOpacity>
+    </View>
   }
 
 }

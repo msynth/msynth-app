@@ -3,8 +3,6 @@ import {View} from 'react-native'
 import Imagination from './Imagination'
 
 export default class ImaginationWrapper extends Component {
-  props: {defaultColor?: string}
-  state: {color: string}
 
   constructor (props: *) {
     super(props)
@@ -13,8 +11,8 @@ export default class ImaginationWrapper extends Component {
     }
   }
 
-  componentDidMount () {
-    Imagination.onColorChange((color) => this.setState({color}))
+  componentWillReceiveProps (nextProps) {
+    Imagination.buttonPressed((color) => this.setState({color}), nextProps.sendData)
   }
 
   componentWillUnmount () {

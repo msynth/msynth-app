@@ -10,20 +10,27 @@ import {ImaginationWrapper} from '../libs/imagination-react-native'
 import Artworks from '../libs/Artworks'
 
 export default class Start extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      sendData: false,
+    }
+
+    this.buttonPressed = this.buttonPressed.bind(this);
+  }
+
+  buttonPressed(){
+    console.log('button pressed');
+    console.log(this.state.sendData);
+    this.setState({ sendData: !this.state.sendData});
+  }
 
   render(): * {
     return (
-      <ImaginationWrapper style={styles.wrapper}>
+      <ImaginationWrapper style={styles.wrapper} sendData={this.state.sendData}>
         <StatusBar barStyle='light-content' />
           <Swiper style={styles.swiper} paginationStyle={styles.swiperPagination}>
-            <Welcome />
-            <AboutView />
-            <BasicArt artwork={Artworks[0]} />
-            <BasicArt artwork={Artworks[1]} />
-            <BasicArt artwork={Artworks[2]} />
-            <BasicArt artwork={Artworks[3]} />
-            <BasicArt artwork={Artworks[4]} />
-            <InfoView />
+            <Welcome buttonPressed={this.buttonPressed} sendData={this.state.sendData}/>
           </Swiper>
       </ImaginationWrapper>
     )
