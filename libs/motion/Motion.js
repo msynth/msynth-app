@@ -9,7 +9,7 @@ let ACCELEROMETER_MAX = Platform.OS === 'ios' ? -1 : 10
 
 // const debouncedPublish = debounce(publish, 500)
 
-class Imagination {
+class Motion {
   accelerationObservable: undefined
   updateInterval: 1000
 
@@ -58,4 +58,4 @@ let makeBetween1And0 = (num: number): number => {
   return num > 1 ? 1 : num < 0 ? 0 : num
 }
 
-export default new Imagination()
+export default new Motion()

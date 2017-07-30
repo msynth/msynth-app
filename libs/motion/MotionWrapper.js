@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import {View} from 'react-native'
-import Imagination from './Imagination'
+import Motion from './Motion'
 
-export default class ImaginationWrapper extends Component {
+export default class MotionWrapper extends Component {
 
   constructor (props: *) {
     super(props)
@@ -12,11 +12,11 @@ export default class ImaginationWrapper extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    Imagination.buttonPressed((color) => this.setState({color}), nextProps.sendData)
+    Motion.buttonPressed((color) => this.setState({color}), nextProps.sendData)
   }
 
   componentWillUnmount () {
-    Imagination.stop()
+    Motion.stop()
   }
 
   render() {

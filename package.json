@@ -1,5 +1,5 @@
 {
-  "name": "Imagination",
+  "name": "mSynth",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -8,15 +8,11 @@
     "flow": "node_modules/.bin/flow"
   },
   "dependencies": {
-    "imagination-react-native": "1.1.6",
-    "lodash": "^4.17.4",
-    "lottie-react-native": "1.1.1",
     "pubnub": "^4.13.0",
     "react": "~15.4.1",
     "react-native": "0.42.2",
-    "react-native-swiper": "1.5.4",
-    "react-redux": "5.0.3",
-    "redux": "3.6.0"
+    "react-native-sensors": "2.3.1",
+    "react-native-swiper": "1.5.4"
   },
   "devDependencies": {
     "babel-eslint": "7.2.3",

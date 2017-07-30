@@ -3,11 +3,7 @@ import React, {Component} from 'react'
 import {StatusBar, StyleSheet, Platform} from 'react-native'
 import Swiper from 'react-native-swiper'
 import Welcome from './Welcome'
-import AboutView from './AboutView'
-import BasicArt from './BasicArt'
-import InfoView from './InfoView'
-import {ImaginationWrapper} from '../libs/imagination-react-native'
-import Artworks from '../libs/Artworks'
+import {MotionWrapper} from '../libs/motion'
 
 export default class Start extends Component {
   constructor(props){
@@ -27,12 +23,12 @@ export default class Start extends Component {
 
   render(): * {
     return (
-      <ImaginationWrapper style={styles.wrapper} sendData={this.state.sendData}>
+      <MotionWrapper style={styles.wrapper} sendData={this.state.sendData}>
         <StatusBar barStyle='light-content' />
           <Swiper style={styles.swiper} paginationStyle={styles.swiperPagination}>
             <Welcome buttonPressed={this.buttonPressed} sendData={this.state.sendData}/>
           </Swiper>
-      </ImaginationWrapper>
+      </MotionWrapper>
     )
   }
 
