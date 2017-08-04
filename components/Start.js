@@ -5,7 +5,7 @@ import Swiper from 'react-native-swiper'
 import Welcome from './Welcome'
 import God from './God'
 import {MotionWrapper} from '../libs/motion'
-// import subscribe from '../libs/PubNub'
+import { pubnub, subscribe, hereNow, unsubscribe } from '../libs/PubNub'
 
 export default class Start extends Component {
   constructor(props){
@@ -16,27 +16,53 @@ export default class Start extends Component {
     }
 
     this.buttonPressed = this.buttonPressed.bind(this);
+    this.hereNow = hereNow.bind(this)
+
+
   }
 
-  // componentWillMount() {
-  //   // subscribe((response) => {
-  //     // this.setState({subscribers: response.occupancy})
-  //     // console.log(response)
-  //   // })
-  // }
+  componentDidMount() {
 
-  buttonPressed(){
-    console.log('button pressed');
-    console.log(this.state.sendData);
+    pubnub.addListener({
+        presence: (presenceEvent) => {
+          console.log('LISTENER: PRESENCE EVENT', presenceEvent)
+          // this.setState({ subscribers: presenceEvent.occupancy })
+          // this.updateSubscribers(presenceEvent.occupancy)
+        }
+    })
+  }
+
+  updateSubscribers(occupancy) {
+    console.log('UPDATING OCCUPANCY WITH: ', occupancy)
+    this.setState({ subscribers: occupancy })
+  }
+
+  buttonPressed() {
+    // if not sending data yet, and will now start sending data
+    if(!this.state.sendData) {
+      subscribe(['sensor_data']);
+    } else {
+      unsubscribe(['sensor_data']);
+    }
+
+
+    setTimeout(() => {
+      this.hereNow(['sensor_data']).then((response) => {
+        console.log('HERENOW complete response', response)
+        this.updateSubscribers(response.totalOccupancy)
+      }); // returns # of people in channel
+    }, 2000);
+
     this.setState({ sendData: !this.state.sendData});
   }
 
   render(): * {
+    var { sendData, subscribers } = this.state
     return (
-      <MotionWrapper style={styles.wrapper} sendData={this.state.sendData}>
+      <MotionWrapper style={styles.wrapper} sendData={sendData}>
         <StatusBar barStyle='light-content' />
           <Swiper style={styles.swiper} paginationStyle={styles.swiperPagination}>
-            <Welcome buttonPressed={this.buttonPressed} sendData={this.state.sendData} subscribers={this.state.subscribers}/>
+            <Welcome buttonPressed={this.buttonPressed} sendData={sendData} subscribers={subscribers}/>
             <God />
           </Swiper>
       </MotionWrapper>

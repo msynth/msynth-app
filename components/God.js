@@ -35,13 +35,13 @@ export default class God extends PureComponent {
         <TouchableHighlight underlayColor='transparent' onPress={() => this.bassDrop0()}>
           {/* conditional button style changing based on the prop. via: http://www.terrydiederich.com/changing-style-as-state-changes-in-react-native/ */}
           <View style={styles.buttonBoxStart}>
-            <Text style={styles.buttonLabelStart}>Lyft</Text>
+            <Text style={styles.buttonLabelStart}>Pub</Text>
           </View>
         </TouchableHighlight>
         <TouchableHighlight underlayColor='transparent' onPress={() => this.bassDrop1()}>
           {/* conditional button style changing based on the prop. via: http://www.terrydiederich.com/changing-style-as-state-changes-in-react-native/ */}
           <View style={styles.buttonBoxStart}>
-            <Text style={styles.buttonLabelStart}>Uber</Text>
+            <Text style={styles.buttonLabelStart}>Nub</Text>
           </View>
         </TouchableHighlight>
         <TouchableHighlight underlayColor='transparent' onPress={() => this.bassDrop2()}>
