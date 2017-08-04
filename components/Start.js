@@ -27,7 +27,7 @@ export default class Start extends Component {
     // initial occupancy
     this.hereNow(['sensor_data'])
       .then((response) => {
-        console.log('HERENOW complete response', response)
+        // console.log('HERENOW complete response', response)
         this.updateSubscribers(response.totalOccupancy)
       })
       .catch(function(error) {
@@ -36,8 +36,7 @@ export default class Start extends Component {
 
     pubnub.addListener({
         presence: (presenceEvent) => {
-          console.log('LISTENER: PRESENCE EVENT', presenceEvent)
-          // this.setState({ subscribers: presenceEvent.occupancy })
+          // console.log('LISTENER: PRESENCE EVENT', presenceEvent)
           this.updateSubscribers(presenceEvent.occupancy)
         }
     })
@@ -45,7 +44,7 @@ export default class Start extends Component {
   }
 
   updateSubscribers(occupancy) {
-    console.log('UPDATING OCCUPANCY WITH: ', occupancy)
+    // console.log('UPDATING OCCUPANCY WITH: ', occupancy)
     this.setState({ subscribers: occupancy })
   }
 
@@ -56,14 +55,6 @@ export default class Start extends Component {
     } else {
       unsubscribe(['sensor_data']);
     }
-
-
-    // setTimeout(() => {
-    //   this.hereNow(['sensor_data']).then((response) => {
-    //     console.log('HERENOW complete response', response)
-    //     this.updateSubscribers(response.totalOccupancy)
-    //   }); // returns # of people in channel
-    // }, 2000);
 
     this.setState({ sendData: !this.state.sendData});
   }
