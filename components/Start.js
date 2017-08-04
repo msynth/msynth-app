@@ -22,14 +22,26 @@ export default class Start extends Component {
   }
 
   componentDidMount() {
+    subscribe(['sensor_data-pnpres']);
+
+    // initial occupancy
+    this.hereNow(['sensor_data'])
+      .then((response) => {
+        console.log('HERENOW complete response', response)
+        this.updateSubscribers(response.totalOccupancy)
+      })
+      .catch(function(error) {
+        console.log('There has been a problem with your fetch operation: ' + error.message);
+      });
 
     pubnub.addListener({
         presence: (presenceEvent) => {
           console.log('LISTENER: PRESENCE EVENT', presenceEvent)
           // this.setState({ subscribers: presenceEvent.occupancy })
-          // this.updateSubscribers(presenceEvent.occupancy)
+          this.updateSubscribers(presenceEvent.occupancy)
         }
     })
+
   }
 
   updateSubscribers(occupancy) {
@@ -46,12 +58,12 @@ export default class Start extends Component {
     }
 
 
-    setTimeout(() => {
-      this.hereNow(['sensor_data']).then((response) => {
-        console.log('HERENOW complete response', response)
-        this.updateSubscribers(response.totalOccupancy)
-      }); // returns # of people in channel
-    }, 2000);
+    // setTimeout(() => {
+    //   this.hereNow(['sensor_data']).then((response) => {
+    //     console.log('HERENOW complete response', response)
+    //     this.updateSubscribers(response.totalOccupancy)
+    //   }); // returns # of people in channel
+    // }, 2000);
 
     this.setState({ sendData: !this.state.sendData});
   }
