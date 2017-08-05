@@ -13,7 +13,7 @@ export default class Welcome extends PureComponent {
 
     return <View style={styles.wrapper}>
       <Image source={logo} style={styles.logo} />
-      <Text>{this.props.subscribers}</Text>
+      <Text style={styles.info}># of Fans: {this.props.subscribers}</Text>
       <TouchableOpacity style={styles.button}>
         <TouchableHighlight underlayColor='transparent' onPress={() => this.props.buttonPressed()}>
           {/* conditional button style changing based on the prop. via: http://www.terrydiederich.com/changing-style-as-state-changes-in-react-native/ */}
@@ -38,6 +38,13 @@ let styles = StyleSheet.create({
     height: 144,
     marginTop: '40%',
     resizeMode: 'contain'
+  },
+  info: {
+    position: 'absolute',
+    backgroundColor: '#f26051',
+    top: 50,
+    right: 0,
+    padding: 10
   },
   button: {
     flexDirection: 'column',
