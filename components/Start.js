@@ -24,23 +24,31 @@ export default class Start extends Component {
   componentDidMount() {
     subscribe(['sensor_data-pnpres']);
 
-    // initial occupancy
-    this.hereNow(['sensor_data'])
-      .then((response) => {
-        // console.log('HERENOW complete response', response)
-        this.updateSubscribers(response.totalOccupancy)
-      })
-      .catch(function(error) {
-        console.log('There has been a problem with your fetch operation: ' + error.message);
-      });
+    // NOTE: This is not working to get & set the initial occupancy.
+    // this.fetchSubscribers();
 
+    // pubnub presence callback function
     pubnub.addListener({
         presence: (presenceEvent) => {
-          // console.log('LISTENER: PRESENCE EVENT', presenceEvent)
+          // console.log('LISTENER: PRESENCE EVENT OCCUPANCY', presenceEvent.occupancy)
           this.updateSubscribers(presenceEvent.occupancy)
         }
     })
 
+  }
+
+  // uses pubnub's hereNow function to query the channel
+  fetchSubscribers() {
+    console.log('COMPONENT DID MOUNT... fetchSubscribers')
+    this.hereNow(['sensor_data'])
+      .then((response) => {
+        // console.log('HERENOW complete response', response)
+        this.setState({subscribers: response.totalOccupancy})
+        // this.updateSubscribers(response.totalOccupancy)
+      })
+      .catch(function(error) {
+        console.log('There has been a problem with your fetch operation: ' + error.message);
+      });
   }
 
   updateSubscribers(occupancy) {
@@ -49,7 +57,7 @@ export default class Start extends Component {
   }
 
   buttonPressed() {
-    // if not sending data yet, and will now start sending data
+
     if(!this.state.sendData) {
       subscribe(['sensor_data']);
     } else {
