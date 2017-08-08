@@ -1,11 +1,10 @@
 {
-  "name": "imagination-react-native",
-  "version": "1.1.6",
+  "name": "motion-react-native",
+  "version": "1.0.0",
   "description": "react native library that takes your accelerometer and turns the values into a color",
   "main": "index.js",
   "repository": {
-    "type": "git",
-    "url": "https://github.com/Matzielab/imagination-react-native.git"
+    "type": "git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

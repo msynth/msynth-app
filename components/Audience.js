@@ -3,7 +3,7 @@ import React, {PureComponent} from 'react'
 import {View, Image, Text, StyleSheet, TouchableOpacity, Linking, Platform, TouchableHighlight} from 'react-native'
 import {logo} from '../libs/Images'
 
-export default class Welcome extends PureComponent {
+export default class Audience extends PureComponent {
   constructor(props){
     super(props);
   }
