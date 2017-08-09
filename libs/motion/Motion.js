@@ -1,6 +1,6 @@
 import { Accelerometer } from 'react-native-sensors'
 import { Platform } from 'react-native'
-import publish from '../PubNub'
+import { publish }  from '../PubNub'
 
 // Values for scale
 let ACCELEROMETER_MIN = Platform.OS === 'ios' ? 1 : -10

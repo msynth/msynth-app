@@ -1,6 +1,6 @@
 // @flow
 import React, {PureComponent} from 'react'
-import {View, Image, Text, StyleSheet, TouchableOpacity, Linking, Platform, TouchableHighlight} from 'react-native'
+import {View, Image, Text, StyleSheet, TouchableOpacity, Platform, TouchableHighlight} from 'react-native'
 import {logo} from '../libs/Images'
 import publish from '../libs/PubNub'
 import pubnubClient from '../libs/pubnubClient'
