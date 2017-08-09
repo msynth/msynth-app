@@ -1,7 +1,7 @@
 // @flow
 import React, {PureComponent} from 'react'
 import {View, Image, Text, StyleSheet, TouchableOpacity, Platform, TouchableHighlight} from 'react-native'
-import {logo} from '../libs/Images'
+import {god} from '../libs/Images'
 import publish from '../libs/PubNub'
 import pubnubClient from '../libs/pubnubClient'
 
@@ -36,7 +36,7 @@ export default class God extends PureComponent {
   render () {
     return (
       <View style={styles.wrapper}>
-        <Image source={logo} style={styles.logo} />
+        <Image source={god} style={styles.logo} />
         <TouchableOpacity style={styles.button}>
           {this.state.textForButtons.map((text, i) => (
             <TouchableHighlight underlayColor='transparent' onPress={() => this.publishSound(`bassDrop${i}`)} key={`button-${i}`}>

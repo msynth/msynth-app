@@ -18,10 +18,20 @@ class Motion {
       return rgbFromAccelerometer(data.x, data.y, data.z, (rgb) => colorChanged(rgb))
     })
   }
+  
+  receiveCoordinates = (receivedCoordinates) => {
+    this.accelerationObservable = new Accelerometer({
+      updateInterval: 250 // how many ms between sending data
+    })
+    this.accelerationObservable.subscribe((data) => {
+      return receivedCoordinates(data.x, data.y)
+    })
+  }
 
-  buttonPressed = (colorChanged, sendData) => {
+  buttonPressed = (colorChanged, receivedCoordinates, sendData) => {
     if(sendData){
       this.onColorChange(colorChanged);
+      // this.receiveCoordinates(receivedCoordinates);
     } else {
       this.stop();
     }
