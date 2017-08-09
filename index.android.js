@@ -1,14 +1,14 @@
 // @flow
 import React, { Component } from 'react';
 import {AppRegistry} from 'react-native';
-import Start from './components/Start'
+import Home from './components/Home'
 
-export default class Imagination extends Component {
+export default class mSynth extends Component {
   render() {
     return (
-      <Start />
+      <Home />
     );
   }
 }
 
-AppRegistry.registerComponent('Imagination', () => Imagination);
+AppRegistry.registerComponent('mSynth', () => mSynth);
