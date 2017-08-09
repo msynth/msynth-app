@@ -9,19 +9,20 @@ let ACCELEROMETER_MAX = Platform.OS === 'ios' ? -1 : 10
 class Motion {
   accelerationObservable: undefined
 
-  onColorChange = (colorChanged: Function) => {
+  onColorChange = (colorChanged: Function, receivedCoordinates: Function) => {
     this.accelerationObservable = new Accelerometer({
       updateInterval: 250 // how many ms between sending data
     })
     this.accelerationObservable.subscribe((data) => {
-        publish('sensor_data', data);
+      publish('sensor_data', data);
+      receivedCoordinates(data.x, data.y);
       return rgbFromAccelerometer(data.x, data.y, data.z, (rgb) => colorChanged(rgb))
     })
   }
 
-  buttonPressed = (colorChanged, sendData) => {
+  buttonPressed = (colorChanged, receivedCoordinates, sendData) => {
     if(sendData){
-      this.onColorChange(colorChanged);
+      this.onColorChange(colorChanged, receivedCoordinates);
     } else {
       this.stop();
     }
